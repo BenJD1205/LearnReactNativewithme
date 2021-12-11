@@ -5,7 +5,7 @@ import {COLORS} from '../constants';
 const IconButton = ({containerStyle,icon,iconStyle,onPress}) => {
     return (
         <TouchableOpacity
-            styles={{
+            style={{
                 ...containerStyle
             }}
             onPress={onPress}

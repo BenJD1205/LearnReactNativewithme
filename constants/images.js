@@ -3,6 +3,7 @@ const bg_1 = require("../assets/images/bg_1.png")
 const work = require("../assets/images/work.png")
 
 const featured_bg_image = require("../assets/images/featured_bg_image.png")
+const mobile_image = require("../assets/images/mobile_image.png")
 const profile = require("../assets/images/profile.png")
 const start_learning = require("../assets/images/start_learning.png")
 const thumbnail_1 = require("../assets/images/thumbnail_1.png")
@@ -22,4 +23,5 @@ export default {
     thumbnail_2,
     thumbnail_3,
     thumbnail_4,
+    mobile_image
 }

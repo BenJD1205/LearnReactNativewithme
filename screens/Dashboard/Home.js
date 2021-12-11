@@ -9,6 +9,7 @@ import {
 import {FlatList} from 'react-native-gesture-handler';
 import {COLORS, SIZES, FONTS, icons,images, dummyData} from '../../constants';
 import {IconButton, TextButton, VerticalCourseCard, LineDivider, CategoryCard, HorizontalCourseCard} from '../../components';
+import {useNavigation} from '@react-navigation/native';
 
 const Section = ({containerStyle, title, onPress, children}) => {
     return(
@@ -47,6 +48,8 @@ const Section = ({containerStyle, title, onPress, children}) => {
 }
 
 const Home = () => {
+
+    const navigation = useNavigation()
 
     function renderHeader(){
         return(
@@ -190,12 +193,16 @@ const Home = () => {
                     }}
                     renderItem={({item,index}) => (
                         <CategoryCard 
+                            sharedElementPrefix="Home"
                             key={index}
                             category={item}
                             containerStyle={{
                                 marginLeft:index == 0 ? SIZES.padding : SIZES.base,
                                 marginRight:index == dummyData.categories.length > -1 ? SIZES.padding : 0
                             }}
+                            onPress={() =>navigation.navigate('CourseListing',{
+                                category:item,sharedElementPrefix:"Home"
+                            })}
                         />
                     )}
                 />

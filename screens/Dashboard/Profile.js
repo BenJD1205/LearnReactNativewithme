@@ -10,17 +10,30 @@ import {
 } from 'react-native';
 import {IconButton,TextButton,LineDivider, ProgressBar, ProfileValue, ProfileRadioButton} from '../../components';
 import {COLORS, FONTS,SIZES, icons, images} from '../../constants'
+import {connect} from 'react-redux';
+import {toggleTheme} from '../../stores/themeActions';
+// import appTheme from '../../constants/theme';
 
-const Profile = () => {
+const Profile = ({appTheme,toggleTheme}) => {
 
     const [newCourseNotification,setNewCourseNotification] = React.useState(false)
     const [studyReminder, setStudyReminder] = React.useState(false)
+
+    ///Handler
+    function toggleThemeHandler(){
+        if(appTheme?.name == "light"){
+            toggleTheme('dark')
+        }else{
+            toggleTheme('light')
+        }
+    }
 
     function renderHeader(){
         return(
             <View style={styles.header}>
                 <Text
                     style={{
+                        color:appTheme?.textColor,
                         ...FONTS.h1
                     }}
                 >
@@ -29,8 +42,9 @@ const Profile = () => {
                 <IconButton 
                     icon={icons.sun}
                     iconStyle={{
-                        tintColor:COLORS.black
+                        tintColor:appTheme?.tintColor
                     }}
+                    onPress={() =>toggleThemeHandler()}
                 />
             </View>
         )
@@ -38,7 +52,7 @@ const Profile = () => {
 
     function renderProfileCard(){
         return(
-            <View  style={styles.profileCard}>   
+            <View  style={[styles.profileCard,{backgroundColor:appTheme?.backgroundColor2}]}>   
                 {/*Profile details*/}
                 <TouchableOpacity
                     style={{
@@ -134,10 +148,10 @@ const Profile = () => {
                             marginTop:SIZES.padding,
                             paddingHorizontal:SIZES.radius,
                             borderRadius:20,
-                            backgroundColor:COLORS.white
+                            backgroundColor:appTheme?.backgroundColor4
                         }}
                         labelStyle={{
-                            color:COLORS.primary
+                            color:appTheme?.textColor2
                         }}
                     />
                 </View>
@@ -224,7 +238,7 @@ const Profile = () => {
         <View
             style={{
                 flex:1,
-                backgroundColor:COLORS.white
+                backgroundColor: appTheme?.backgroundColor1
             }}
         >
             {/*Header*/}
@@ -268,7 +282,6 @@ const styles = StyleSheet.create({
         paddingHorizontal:SIZES.radius,
         paddingVertical:20,
         borderRadius:SIZES.radius,
-        backgroundColor:COLORS.primary3
     },
     profileInfo:{
         position:'absolute',
@@ -296,4 +309,19 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Profile;
+function mapStateToProps(state){
+    return{
+        appTheme:state.appTheme,
+        error:state.error
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        toggleTheme: (themeType) => {
+            dispatch(toggleTheme(themeType))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
