@@ -10,7 +10,8 @@ import themeReducer from './stores/themeReducer';
 
 import {
     MainLayout,
-    CourseListing
+    CourseListing,
+    CourseDetails
 } from "./screens";
 
 // const Stack = createNativeStackNavigator();
@@ -61,6 +62,10 @@ const App = () => {
                         name="CourseListing"
                         component={CourseListing}
                         options={() =>options}
+                    />
+                    <Stack.Screen 
+                        name="CourseDetails"
+                        component={CourseDetails}
                     />
                 </Stack.Navigator>
             </NavigationContainer>

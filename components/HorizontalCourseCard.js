@@ -4,13 +4,14 @@ import {View,Text,Image,ImageBackground,TouchableOpacity} from 'react-native';
 import {IconLabel} from '../components';
 import {SIZES,COLORS,FONTS,icons} from '../constants';
 
-const HorizontalCourseCard = ({course,containerStyle}) => {
+const HorizontalCourseCard = ({course,containerStyle,onPress}) => {
     return(
         <TouchableOpacity
             style={{
                 flexDirection:'row',
                 ...containerStyle
             }}
+            onPress={onPress}
         >
             {/*Thumbnails */}
             <ImageBackground
